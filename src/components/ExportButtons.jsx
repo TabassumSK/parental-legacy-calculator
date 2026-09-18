@@ -1,3 +1,4 @@
+import { useState } from "react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
@@ -31,7 +32,17 @@ function toCSV(result, dateLabel) {
   return lines.join("\n");
 }
 
-export default function ExportButtons({ result, dateLabel }) {
+export default function ExportButtons({ result, dateLabel, onSave }) {
+  const [savedSuccess, setSavedSuccess] = useState(false);
+
+  const handleSaveClick = () => {
+    if (onSave) {
+      onSave();
+      setSavedSuccess(true);
+      setTimeout(() => setSavedSuccess(false), 2500);
+    }
+  };
+
   const handleExportCSV = () => {
     const csv = toCSV(result, dateLabel);
     downloadBlob(csv, `parental-legacy-${dateLabel.replace(/\//g, "-")}.csv`, "text/csv;charset=utf-8;");
@@ -78,36 +89,54 @@ export default function ExportButtons({ result, dateLabel }) {
   };
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 glass-card p-4">
+    <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-subtle dark:border-slate-800 dark:bg-slate-900">
       <div className="flex items-center gap-2">
         <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
         <span className="font-heading text-sm font-bold text-slate-800 dark:text-slate-200">
-          Export Reading Report
+          Actions & Export
         </span>
       </div>
 
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap items-center gap-2.5">
+        {onSave && (
+          <button
+            type="button"
+            onClick={handleSaveClick}
+            className="flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-xs font-bold text-white shadow-sm transition hover:bg-emerald-700 active:scale-[0.98] dark:bg-emerald-500 dark:text-slate-950 dark:hover:bg-emerald-400 cursor-pointer"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              {savedSuccess ? (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+              )}
+            </svg>
+            {savedSuccess ? "Saved to Sidebar!" : "Save Reading"}
+          </button>
+        )}
+
         <button
           type="button"
           onClick={handleExportPDF}
-          className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-amber-500/20 transition hover:from-amber-600 hover:to-amber-700 hover:shadow-lg active:scale-[0.98]"
+          className="flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-xs font-bold text-white shadow-sm transition hover:bg-slate-800 dark:bg-amber-500 dark:text-slate-950 dark:hover:bg-amber-400 active:scale-[0.98] cursor-pointer"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V7.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 1H7a2 2 0 00-2 2v16a2 2 0 002 2z" />
           </svg>
-          Export Document (PDF)
+          Export PDF
         </button>
+
         <button
           type="button"
           onClick={handleExportCSV}
-          className="flex items-center gap-2 rounded-xl border border-slate-300/80 bg-white/80 px-4 py-2.5 text-xs font-bold text-slate-800 shadow-sm transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:hover:bg-slate-800 active:scale-[0.98]"
+          className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-xs font-bold text-slate-800 shadow-sm transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 active:scale-[0.98] cursor-pointer"
         >
           <svg className="w-4 h-4 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
-          Export Raw Data (CSV)
+          Export CSV
         </button>
       </div>
     </div>

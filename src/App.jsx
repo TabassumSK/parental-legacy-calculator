@@ -40,7 +40,7 @@ export default function App() {
 
       {/* Main Centered Container (Max Width ~1200px) */}
       <main className="mx-auto max-w-[1200px] w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex-1 space-y-10">
-        
+
         {/* Hero Section & DOB Input */}
         <section className="text-center max-w-2xl mx-auto space-y-4">
           <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl text-slate-900 dark:text-white">
@@ -71,7 +71,7 @@ export default function App() {
             <ExportButtons result={result} dateLabel={dateLabel} onSave={handleSave} />
           </div>
         ) : (
-          <div className="rounded-xl border border-slate-200 bg-white p-8 text-center shadow-subtle dark:border-slate-800 dark:bg-slate-900 max-w-lg mx-auto">
+          <div className="rounded-xl border border-slate-300 bg-white p-8 text-center shadow-subtle dark:border-slate-800 dark:bg-slate-900 max-w-lg mx-auto">
             <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
               Select your date of birth to generate your reading.
             </p>
@@ -90,7 +90,7 @@ export default function App() {
       </main>
 
       {/* Small Footer */}
-      <footer className="w-full border-t border-slate-200 dark:border-slate-800 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
+      <footer className="w-full border-t border-slate-300 dark:border-slate-800 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
         Parental Legacy & Life Factors Calculator · Runs entirely in your browser
       </footer>
     </div>

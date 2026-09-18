@@ -6,15 +6,9 @@ export default function ThemeToggle({ theme, onToggle }) {
       onClick={onToggle}
       aria-pressed={isDark}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className="group flex h-9 w-16 items-center rounded-full border border-ink-900/15 bg-ink-900/5 px-1 transition-colors dark:border-parchment-100/15 dark:bg-parchment-100/10"
+      className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-slate-100 text-base shadow-subtle transition hover:bg-slate-200 dark:border-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 cursor-pointer"
     >
-      <span
-        className={`flex h-7 w-7 items-center justify-center rounded-full bg-parchment-50 text-xs shadow-sm transition-transform duration-300 dark:bg-ink-800 ${
-          isDark ? "translate-x-7" : "translate-x-0"
-        }`}
-      >
-        {isDark ? "🌙" : "☀️"}
-      </span>
+      {isDark ? "🌙" : "☀️"}
     </button>
   );
 }

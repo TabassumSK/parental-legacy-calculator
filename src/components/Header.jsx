@@ -2,7 +2,7 @@ import ThemeToggle from "./ThemeToggle.jsx";
 
 export default function Header({ theme, onToggleTheme }) {
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/80 backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-950/80">
+    <header className="sticky top-0 z-40 border-b border-slate-300/80 bg-white/80 backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-950/80">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <div className="flex items-center gap-3.5">
           <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500/20 via-slate-900/10 to-sky-500/20 p-2 ring-1 ring-amber-500/30 dark:ring-amber-500/20">

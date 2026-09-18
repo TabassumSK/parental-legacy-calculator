@@ -26,7 +26,7 @@ html:not(.dark) body {
 
 /* Glass Card Component Utility */
 .glass-card {
-  @apply bg-white/70 dark:bg-slate-900/75 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800/80 shadow-lg dark:shadow-slate-950/40 rounded-2xl transition-all duration-300;
+  @apply bg-white/70 dark:bg-slate-900/75 backdrop-blur-xl border border-slate-300/80 dark:border-slate-800/80 shadow-lg dark:shadow-slate-950/40 rounded-2xl transition-all duration-300;
 }
 
 .glass-card-hover {
