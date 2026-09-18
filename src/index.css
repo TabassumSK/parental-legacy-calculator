@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-slate-950 text-slate-100 font-body transition-colors duration-300 antialiased selection:bg-amber-500/30 selection:text-amber-200;
+  background-image:
+    radial-gradient(at 15% 15%, rgba(217, 119, 6, 0.07) 0px, transparent 50%),
+    radial-gradient(at 85% 20%, rgba(2, 132, 199, 0.08) 0px, transparent 50%),
+    radial-gradient(at 50% 80%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Light mode background customization */
+html:not(.dark) body {
+  @apply bg-amber-50/40 text-slate-800;
+  background-image:
+    radial-gradient(at 10% 10%, rgba(245, 158, 11, 0.12) 0px, transparent 40%),
+    radial-gradient(at 90% 15%, rgba(56, 189, 248, 0.14) 0px, transparent 40%),
+    radial-gradient(at 50% 90%, rgba(251, 191, 36, 0.08) 0px, transparent 50%);
+}
+
+/* Glass Card Component Utility */
+.glass-card {
+  @apply bg-white/70 dark:bg-slate-900/75 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800/80 shadow-lg dark:shadow-slate-950/40 rounded-2xl transition-all duration-300;
+}
+
+.glass-card-hover {
+  @apply glass-card hover:border-amber-500/40 dark:hover:border-amber-500/30 hover:shadow-xl hover:shadow-amber-500/5;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full hover:bg-slate-400 dark:hover:bg-slate-600;
+}
+
+/* Visible keyboard focus */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid theme("colors.mother.DEFAULT");
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.hairline {
+  @apply border-t border-slate-200 dark:border-slate-800/80;
+}
