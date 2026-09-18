@@ -1,42 +1,39 @@
 # Parental Legacy & Life Factors Calculator
 
-A React app that turns a date of birth into a reading across seven life
-factors, each split between a **Mother** share and a **Father** share. The
-factor totals always add up to exactly **100**, and the whole thing runs
-client-side — no backend or database needed.
+A responsive React + Vite app that turns a date of birth into a seven-factor parental legacy reading. Each factor is split between a Mother share and a Father share, and the totals always balance to 100.
 
 ## Live demo
 
-_Add your deployed URL here after running the deploy step below._
+Deployed URL:
+
+- https://your-project-name.vercel.app
 
 ## Features
 
-- 📅 Native date picker with validation (real calendar date, not in the future)
-- ⚡ Auto-calculates the moment a date is chosen — no submit button
-- 📊 Full Mother / Father / Total table for all seven life factors
-- 🥇 Legacy banner showing which parent's total is higher, and by how much
-- 📈 Radar chart (factor-by-factor) and donut chart (overall split), built with Recharts
-- 📱 Responsive layout, down to small mobile screens
-- 🌗 Dark / light mode toggle, persisted in `localStorage`
-- 💾 Save readings for past dates and revisit them later (`localStorage`)
-- 📄 Export the current reading as a PDF
-- 📑 Export the current reading as a CSV
+- 📅 Birth date input with validation and calendar-safe checks
+- ⚡ Real-time calculation as soon as a valid date is selected
+- 📊 Full seven-factor comparison table for Mother, Father, and Total
+- 🥇 Legacy banner highlighting the higher parent and the difference
+- 📈 Radar and donut chart views built with Recharts
+- 📱 Responsive layout for desktop, tablet, and mobile screens
+- 🌗 Light/dark mode toggle saved in localStorage
+- 💾 Save and revisit readings locally in the browser
+- 📄 Export the current reading as PDF
+- 📑 Export the current reading as CSV
 
 ## How the calculation works
 
-Each of the seven life factors carries a fixed pair of template values —
-a `high` value and a `low` value (`src/utils/calculator.js`). These
-magnitudes never change.
+The calculator uses a fixed pair of values for each life factor in `src/utils/calculator.js`:
 
-- **Odd day of birth** → Mother is assigned each factor's `high` value,
-  Father gets `low`.
-- **Even day of birth** → the assignment flips: Mother gets `low`, Father
-  gets `high`.
+- `high` value
+- `low` value
 
-So the numbers themselves are identical across every odd-day reading, and
-identical across every even-day reading — only the Mother/Father labels
-swap. Since every factor's `high + low` pair is fixed, Mother's total and
-Father's total always add up to exactly 100, regardless of the date.
+For each factor:
+
+- If the day of birth is odd, Mother receives the `high` value and Father receives the `low` value.
+- If the day of birth is even, the assignment is reversed.
+
+Because the pairs always sum to the same total, Mother and Father totals always add up to exactly 100, regardless of the date.
 
 ## Getting started
 
@@ -45,34 +42,47 @@ npm install
 npm run dev
 ```
 
-Open the printed local URL (typically `http://localhost:5173`).
+Then open the local URL shown in the terminal, usually:
 
-### Build for production
+```bash
+http://localhost:5173
+```
+
+## Production build
 
 ```bash
 npm run build
-npm run preview   # optional: preview the production build locally
+npm run preview
 ```
 
-The static output lands in `dist/`.
+This generates a static production build in the `dist/` folder.
 
 ## Deploying
 
-Any static host works, since there's no backend:
+Because this app has no backend, it can be deployed to any static hosting service.
 
-- **Vercel**: import the repo, framework preset "Vite", no env vars needed.
-- **Netlify**: build command `npm run build`, publish directory `dist`.
-- **GitHub Pages**: run `npm run build` and publish the `dist/` folder (e.g.
-  with the `gh-pages` package or a GitHub Actions workflow).
+### Recommended options
+
+- Vercel
+  - Import the repo
+  - Framework preset: Vite
+  - No environment variables required
+
+- Netlify
+  - Build command: `npm run build`
+  - Publish directory: `dist`
+
+- GitHub Pages
+  - Publish the generated `dist/` folder via GitHub Actions or the `gh-pages` package
 
 ## Project structure
 
-```
+```text
 src/
-  components/     UI components (form, table, charts, exports, etc.)
-  hooks/          useTheme (dark mode) and useSavedReadings (localStorage)
+  components/     UI blocks for the form, cards, charts, export buttons, and saved readings
+  hooks/          theme and saved-readings logic
   utils/
-    calculator.js  Core calculation engine + DOB validation
+    calculator.js  calculation engine and date validation
   App.jsx
   main.jsx
   index.css
@@ -80,15 +90,14 @@ src/
 
 ## Tech stack
 
-- React 18 (functional components + hooks)
-- Tailwind CSS for styling
-- Recharts for the radar and donut charts
-- jsPDF + jspdf-autotable for PDF export
-- Vite as the build tool
+- React 18
+- Vite
+- Tailwind CSS
+- Recharts
+- jsPDF + jspdf-autotable
 
 ## Notes
 
-- No backend or database is used — everything (theme preference and saved
-  readings) is kept in the browser's `localStorage`.
-- All calculation logic is pure and unit-testable, isolated in
-  `src/utils/calculator.js`.
+- No backend or database is required.
+- Theme preference and saved readings are stored in the browser using `localStorage`.
+- The core calculation logic is isolated in `src/utils/calculator.js` and is easy to test or extend.
